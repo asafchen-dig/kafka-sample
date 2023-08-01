@@ -1,7 +1,10 @@
 version: '2.4'
+
 services:
+
+  # https://hub.docker.com/r/bitnami/kafka/tags
   kafka:
-    image: bitnami/kafka:3.1.0
+    image: bitnami/kafka:3.5.1
     container_name: kafka
     command:
       - 'sh'
@@ -23,14 +26,16 @@ services:
     ports:
       - "0.0.0.0:9092:9092"
 
+  # https://hub.docker.com/r/provectuslabs/kafka-ui/tags
   kafka-ui:
-    image: provectuslabs/kafka-ui
+    image: provectuslabs/kafka-ui:v0.7.1
     container_name: kafka-ui
     ports:
-      - "8080:8080"
+      - "9988:8080"
     restart: "always"
     environment:
       KAFKA_CLUSTERS_0_NAME: "lkorDA4qT6W1K_dk0LHvtg"
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9094
     depends_on:
       - kafka
+
